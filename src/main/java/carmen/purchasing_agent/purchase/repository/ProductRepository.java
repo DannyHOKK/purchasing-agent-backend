@@ -1,4 +1,4 @@
-package carmen.purchasing_agent.repository;
+package carmen.purchasing_agent.purchase.repository;
 
 import carmen.purchasing_agent.core.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

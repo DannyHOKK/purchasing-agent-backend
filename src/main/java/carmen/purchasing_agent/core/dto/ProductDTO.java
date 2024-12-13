@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class ProductDTO {
+    private Integer productId;
     private String productBrand;
     private String productName;
     private String productType;
@@ -18,6 +19,14 @@ public class ProductDTO {
 
     public String getProductBrand() {
         return productBrand;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public void setProductBrand(String productBrand) {
