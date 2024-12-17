@@ -8,23 +8,20 @@ import java.util.Date;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
     private Integer orderId;
+    private Integer quantity;
     private Boolean paid;
     private Date createDate;
     private Date modifyDate;
     private String takeMethod;
     private String paymentMethod;
     private String remark;
+    private String status;
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
     private Product product;
@@ -32,14 +29,37 @@ public class Orders {
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
     private Customer customer;
 
+    public Orders() {
+    }
 
     public Orders(OrdersDTO ordersDTO) {
         this.paid = ordersDTO.getPaid();
         this.takeMethod = ordersDTO.getTakeMethod();
         this.paymentMethod = ordersDTO.getPaymentMethod();
         this.remark = ordersDTO.getRemark();
-        this.product = ordersDTO.getProduct();
-        this.customer = ordersDTO.getCustomer();
+        this.quantity = ordersDTO.getQuantity();
+    }
+
+    public Orders(Integer orderId, Integer quantity, Boolean paid, Date createDate, Date modifyDate, String takeMethod, String paymentMethod, String remark, String status, Product product, Customer customer) {
+        this.orderId = orderId;
+        this.quantity = quantity;
+        this.paid = paid;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.takeMethod = takeMethod;
+        this.paymentMethod = paymentMethod;
+        this.remark = remark;
+        this.status = status;
+        this.product = product;
+        this.customer = customer;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Integer getOrderId() {
@@ -112,5 +132,13 @@ public class Orders {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

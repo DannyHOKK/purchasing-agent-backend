@@ -27,6 +27,9 @@ public class Customer {
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
 
+    public Customer() {
+    }
+
     public Customer(CustomerDTO customerDTO) {
         this.phone = customerDTO.getPhone();
         this.instagram = customerDTO.getInstagram();

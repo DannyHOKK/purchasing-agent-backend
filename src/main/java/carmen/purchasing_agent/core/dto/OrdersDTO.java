@@ -8,9 +8,21 @@ public class OrdersDTO {
     private Boolean paid;
     private String takeMethod;
     private String paymentMethod;
+    private Integer quantity;
     private String remark;
-    private Product product;
-    private Customer customer;
+    private Integer productId;
+    private Integer customerId;
+//    private Product product;
+//    private Customer customer;
+
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public Boolean getPaid() {
         return paid;
@@ -44,19 +56,19 @@ public class OrdersDTO {
         this.remark = remark;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 }

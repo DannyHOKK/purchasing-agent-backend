@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/customer")
 @CrossOrigin
@@ -19,8 +21,22 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+
+    @GetMapping("getAllCustomer")
+    public ResultVO getAllCustomer(){
+        try {
+            List<Customer> customerList = customerService.getAllCustomer();
+
+            if (ObjectUtils.isEmpty(customerList)){
+                return ResultVoUtil.error("失敗");
+            }
+            return ResultVoUtil.success("成功", customerList);
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
     @GetMapping("/getCustomerById")
-    public ResultVO getCustomer(@RequestParam("customerId") Integer customerId){
+    public ResultVO getCustomerById(@RequestParam("customerId") Integer customerId){
         try {
             Customer customer = customerService.getCustomerById(customerId);
 
@@ -34,7 +50,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getCustomerByPhone")
-    public ResultVO getCustomer(@RequestParam("customerPhone") String phone){
+    public ResultVO getCustomerByPhone(@RequestParam("customerPhone") String phone){
         try {
             Customer customer = customerService.getCustomerByPhone(phone);
 

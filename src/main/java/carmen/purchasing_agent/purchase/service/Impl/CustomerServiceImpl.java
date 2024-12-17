@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -39,5 +40,10 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerByPhone(String phone) {
         Customer customer = (Customer) customerRepository.findByPhone(phone).orElseThrow();
         return customer;
+    }
+
+    @Override
+    public List<Customer> getAllCustomer() {
+        return customerRepository.findAll();
     }
 }

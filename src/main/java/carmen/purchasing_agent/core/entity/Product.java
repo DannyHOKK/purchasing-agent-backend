@@ -31,6 +31,8 @@ public class Product {
     private Integer productPrice;
     @Column(name = "QUANTITY")
     private Integer quantity;
+    @Column(name = "STOCK")
+    private Integer stock;
     @Column(name = "CREATE_DATE")
     private Date createDate;
     @Column(name = "MODIFY_DATE")
@@ -45,7 +47,6 @@ public class Product {
         this.productType = productDTO.getProductType();
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
-        this.quantity = productDTO.getQuantity();
     }
 
     public Integer getProductId() {
@@ -118,5 +119,13 @@ public class Product {
 
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }
