@@ -21,6 +21,7 @@ public class Customer {
     private Date createDate;
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
+    private String remark;
 
     public Customer() {
     }
@@ -29,6 +30,14 @@ public class Customer {
         this.phone = customerDTO.getPhone();
         this.instagram = customerDTO.getInstagram();
         this.shippingAddress = customerDTO.getShippingAddress();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getCustomerId() {
