@@ -8,11 +8,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "customer")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
 public class Customer {
 
     @Id
