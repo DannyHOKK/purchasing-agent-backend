@@ -3,11 +3,6 @@ package carmen.purchasing_agent.core.dto;
 import jakarta.persistence.Column;
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
 public class ProductDTO {
     private Integer productId;
     private String productBrand;
@@ -16,6 +11,16 @@ public class ProductDTO {
     private String productCost;
     private Integer productPrice;
     private Integer quantity;
+    private Integer stock;
+
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
     public String getProductBrand() {
         return productBrand;

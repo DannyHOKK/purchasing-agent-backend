@@ -30,8 +30,11 @@ public class OrdersServiceImpl implements OrdersService {
 
         Orders orders = new Orders(ordersDTO);
 
-        Product product = productRepository.findById(ordersDTO.getProductId()).orElseThrow();
-        Customer customer = customerRepository.findById(ordersDTO.getCustomerId()).orElseThrow();
+//        Product product = productRepository.findById(ordersDTO.getProductId()).orElseThrow();
+//        Customer customer = customerRepository.findById(ordersDTO.getCustomerId()).orElseThrow();
+
+        Product product = productRepository.findByProductName(ordersDTO.getProductName());
+        Customer customer = customerRepository.findByPhone(ordersDTO.getPhone());
 
         orders.setProduct(product);
         orders.setCustomer(customer);

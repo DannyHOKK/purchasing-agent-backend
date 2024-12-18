@@ -4,17 +4,33 @@ import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.core.entity.Product;
 
 public class OrdersDTO {
-
+    private String phone;
     private Boolean paid;
     private String takeMethod;
     private String paymentMethod;
     private Integer quantity;
     private String remark;
-    private Integer productId;
-    private Integer customerId;
-//    private Product product;
-//    private Customer customer;
+    private String productName;
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public Integer getQuantity() {
         return quantity;
@@ -52,23 +68,4 @@ public class OrdersDTO {
         return remark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
 }

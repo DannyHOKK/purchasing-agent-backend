@@ -14,13 +14,17 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID")
     private Integer customerId;
+    @Column(name = "PHONE")
     private String phone;
+    @Column(name = "INSTAGRAM")
     private String instagram;
+    @Column(name = "SHIPPING_ADDRESS")
     private String shippingAddress;
     @Column(name = "CREATE_DATE")
     private Date createDate;
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
+    @Column(name = "REMARK")
     private String remark;
 
     public Customer() {
@@ -30,6 +34,18 @@ public class Customer {
         this.phone = customerDTO.getPhone();
         this.instagram = customerDTO.getInstagram();
         this.shippingAddress = customerDTO.getShippingAddress();
+    }
+
+
+
+    public Customer(Integer customerId, String phone, String instagram, String shippingAddress, Date createDate, Date modifyDate, String remark) {
+        this.customerId = customerId;
+        this.phone = phone;
+        this.instagram = instagram;
+        this.shippingAddress = shippingAddress;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.remark = remark;
     }
 
     public String getRemark() {

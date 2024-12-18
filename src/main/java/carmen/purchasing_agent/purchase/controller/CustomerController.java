@@ -50,7 +50,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getCustomerByPhone")
-    public ResultVO getCustomerByPhone(@RequestParam("customerPhone") String phone){
+    public ResultVO getCustomerByPhone(@RequestParam("phone") String phone){
         try {
             Customer customer = customerService.getCustomerByPhone(phone);
 

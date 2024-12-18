@@ -4,6 +4,7 @@ import carmen.purchasing_agent.core.dto.ProductDTO;
 import carmen.purchasing_agent.core.entity.Product;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,12 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product(productDTO);
 
         product.setQuantity(0);
-        product.setStock(0);
+
+        if(StringUtils.isEmpty(productDTO.getStock().toString())){
+            product.setStock(0);
+        }else{
+            product.setStock(productDTO.getStock());
+        }
         product.setCreateDate(new Date());
         product.setModifyDate(new Date());
 

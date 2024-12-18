@@ -4,6 +4,7 @@ import carmen.purchasing_agent.core.dto.CustomerDTO;
 import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.purchase.repository.CustomerRepository;
 import carmen.purchasing_agent.purchase.service.CustomerService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String createCustomer(CustomerDTO customerDTO) {
+
+        Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
+
+        if(ObjectUtils.isNotEmpty(checkExistCustomer)){
+            return "電話已註冊";
+        }
 
         Customer customer = new Customer(customerDTO);
 
@@ -38,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerByPhone(String phone) {
-        Customer customer = (Customer) customerRepository.findByPhone(phone).orElseThrow();
+        Customer customer = customerRepository.findByPhone(phone);
         return customer;
     }
 
