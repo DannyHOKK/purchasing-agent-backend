@@ -5,6 +5,7 @@ import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.purchase.repository.CustomerRepository;
 import carmen.purchasing_agent.purchase.service.CustomerService;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     public String createCustomer(CustomerDTO customerDTO) {
 
         Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
-
-        if(ObjectUtils.isNotEmpty(checkExistCustomer)){
+        Customer checkExistIg = customerRepository.findByInstagram(customerDTO.getInstagram());
+        if(ObjectUtils.isNotEmpty(checkExistCustomer) || StringUtils.isNotEmpty(customerDTO.getPhone())){
             return "電話已註冊";
+        }
+        if (ObjectUtils.isNotEmpty(checkExistIg) || StringUtils.isNotEmpty(customerDTO.getInstagram())){
+            return "Instagram已註冊";
         }
 
         Customer customer = new Customer(customerDTO);
