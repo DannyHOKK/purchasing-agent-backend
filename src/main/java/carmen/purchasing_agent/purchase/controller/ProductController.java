@@ -80,11 +80,13 @@ public class ProductController {
             String errMsg = productService.deleteProductById(productId);
 
             if (StringUtils.isNotEmpty(errMsg)){
-                return ResultVoUtil.error("刪除失敗");
+                return ResultVoUtil.error(errMsg);
             }
             return ResultVoUtil.success("成功刪除");
         }catch (Exception e){
             return ResultVoUtil.error();
         }
     }
+
+
 }

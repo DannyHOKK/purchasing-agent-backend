@@ -5,12 +5,21 @@ import carmen.purchasing_agent.core.entity.Product;
 
 public class OrdersDTO {
     private String phone;
+    private String instagram;
     private Boolean paid;
     private String takeMethod;
     private String paymentMethod;
     private Integer quantity;
     private String remark;
     private String productName;
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
 
     public String getPhone() {
         return phone;

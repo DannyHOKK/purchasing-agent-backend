@@ -9,10 +9,18 @@ public class ProductDTO {
     private String productName;
     private String productType;
     private String productCost;
+    private Float discount;
     private Integer productPrice;
     private Integer quantity;
     private Integer stock;
 
+    public Float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Float discount) {
+        this.discount = discount;
+    }
 
     public Integer getStock() {
         return stock;

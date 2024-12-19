@@ -78,4 +78,33 @@ public class CustomerController {
     }
 
 
+    @DeleteMapping("/deleteCustomer/{customerId}")
+    public ResultVO deleteCustomer(@PathVariable Integer customerId){
+        try {
+            String errMsg = customerService.deleteCustomer(customerId);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("刪除成功");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
+
+    @PostMapping("/modifyCustomer")
+    public ResultVO modifyCustomer(@RequestBody CustomerDTO customerDTO){
+        try {
+            String errMsg = customerService.modifyCustomer(customerDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
 }

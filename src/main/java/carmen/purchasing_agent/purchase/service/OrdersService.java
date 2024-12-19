@@ -9,4 +9,6 @@ public interface OrdersService {
     String createOrder(OrdersDTO ordersDTO);
 
     List<Orders> getAllOrders();
+
+    String deleteOrderById(Integer orderId);
 }

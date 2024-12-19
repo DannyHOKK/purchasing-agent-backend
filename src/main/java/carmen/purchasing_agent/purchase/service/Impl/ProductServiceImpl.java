@@ -4,9 +4,11 @@ import carmen.purchasing_agent.core.dto.ProductDTO;
 import carmen.purchasing_agent.core.entity.Product;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -23,11 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
         product.setQuantity(0);
 
-        if(StringUtils.isEmpty(productDTO.getStock().toString())){
-            product.setStock(0);
-        }else{
-            product.setStock(productDTO.getStock());
-        }
+        product.setStock(productDTO.getStock());
         product.setCreateDate(new Date());
         product.setModifyDate(new Date());
 
@@ -41,6 +39,13 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(productDTO.getProductId()).orElseThrow();
 
+        Product checkProductName = productRepository.findByProductName(productDTO.getProductName());
+
+        if (!StringUtils.equals(product.getProductName(),productDTO.getProductName())){
+            if(ObjectUtils.isNotEmpty(checkProductName)){
+                return "產品名已被註冊";
+            }
+        }
         product.setProductBrand(productDTO.getProductBrand());
         product.setProductType(productDTO.getProductType());
         product.setProductName(productDTO.getProductName());
@@ -56,8 +61,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String deleteProductById(Integer productId) {
 
-        productRepository.deleteById(productId);
-        return null;
+        try{
+            productRepository.deleteById(productId);
+            return null;
+        }catch (Exception e){
+            return "刪除失敗，貨品已被落單，請先刪除訂單";
+        }
     }
 
     @Override

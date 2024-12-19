@@ -18,12 +18,12 @@ import java.util.List;
 public class OrdersController {
 
     @Autowired
-    private OrdersService orderListService;
+    private OrdersService ordersService;
 
     @GetMapping("/getAllOrders")
     public ResultVO getAllOrders(){
         try {
-            List<Orders> ordersList = orderListService.getAllOrders();
+            List<Orders> ordersList = ordersService.getAllOrders();
 
             if (ObjectUtils.isEmpty(ordersList)){
                 return ResultVoUtil.error("失敗");
@@ -36,7 +36,7 @@ public class OrdersController {
     @PostMapping("/createOrder")
     public ResultVO createOrder(@RequestBody OrdersDTO ordersDTO){
         try {
-            String errMsg = orderListService.createOrder(ordersDTO);
+            String errMsg = ordersService.createOrder(ordersDTO);
 
             if (StringUtils.isNotEmpty(errMsg)){
                 return ResultVoUtil.error("保存失敗");
@@ -48,6 +48,19 @@ public class OrdersController {
     }
 
 
+    @DeleteMapping("/deleteOrderById/{orderId}")
+    public ResultVO deleteOrderById(@PathVariable Integer orderId){
+        try {
+            String errMsg = ordersService.deleteOrderById(orderId);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功刪除");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
 
 
 }

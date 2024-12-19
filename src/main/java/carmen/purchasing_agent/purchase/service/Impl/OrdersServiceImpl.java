@@ -8,6 +8,7 @@ import carmen.purchasing_agent.purchase.repository.CustomerRepository;
 import carmen.purchasing_agent.purchase.repository.OrdersRepository;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
 import carmen.purchasing_agent.purchase.service.OrdersService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,11 +34,19 @@ public class OrdersServiceImpl implements OrdersService {
 //        Product product = productRepository.findById(ordersDTO.getProductId()).orElseThrow();
 //        Customer customer = customerRepository.findById(ordersDTO.getCustomerId()).orElseThrow();
 
+        Customer customer = new Customer();
         Product product = productRepository.findByProductName(ordersDTO.getProductName());
-        Customer customer = customerRepository.findByPhone(ordersDTO.getPhone());
+        if (StringUtils.isNotEmpty(ordersDTO.getPhone())) {
+            customer = customerRepository.findByPhone(ordersDTO.getPhone());
+        }else if(StringUtils.isNotEmpty(ordersDTO.getInstagram())){
+            customer = customerRepository.findByInstagram(ordersDTO.getInstagram());
+        }else{
+            return "電話 / IG 錯誤";
+        }
+
+        orders.setCustomer(customer);
 
         orders.setProduct(product);
-        orders.setCustomer(customer);
         orders.setQuantity(orders.getQuantity());
         orders.setCreateDate(new Date());
         orders.setModifyDate(new Date());
@@ -60,5 +69,17 @@ public class OrdersServiceImpl implements OrdersService {
         List<Orders> ordersList = ordersRepository.findAll();
 
         return ordersList;
+    }
+
+    @Override
+    public String deleteOrderById(Integer orderId) {
+
+        try {
+            ordersRepository.deleteById(orderId);
+            return null;
+        }catch (Exception e){
+            return "刪除失敗";
+        }
+
     }
 }

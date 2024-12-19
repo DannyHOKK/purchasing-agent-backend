@@ -34,6 +34,7 @@ public class Customer {
         this.phone = customerDTO.getPhone();
         this.instagram = customerDTO.getInstagram();
         this.shippingAddress = customerDTO.getShippingAddress();
+        this.remark = customerDTO.getRemark();
     }
 
 

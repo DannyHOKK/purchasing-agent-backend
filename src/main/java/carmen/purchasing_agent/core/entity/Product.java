@@ -22,6 +22,8 @@ public class Product {
     private String productType;
     @Column(name = "PRODUCT_COST")
     private String productCost;
+    @Column(name = "DISCOUNT")
+    private Float discount;
     @Column(name = "PRODUCT_PRICE")
     private Integer productPrice;
     @Column(name = "QUANTITY")
@@ -42,6 +44,16 @@ public class Product {
         this.productType = productDTO.getProductType();
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
+        this.discount = (float) (productDTO.getDiscount() * 0.01);
+    }
+
+
+    public Float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Float discount) {
+        this.discount = discount;
     }
 
     public Integer getProductId() {

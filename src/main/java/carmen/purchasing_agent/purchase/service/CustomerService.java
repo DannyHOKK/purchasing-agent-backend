@@ -13,4 +13,8 @@ public interface CustomerService {
     Customer getCustomerByPhone(String phone);
 
     List<Customer> getAllCustomer();
+
+    String deleteCustomer(Integer customerId);
+
+    String modifyCustomer(CustomerDTO customerDTO);
 }

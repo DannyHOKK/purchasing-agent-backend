@@ -21,13 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String createCustomer(CustomerDTO customerDTO) {
 
-        Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
-        Customer checkExistIg = customerRepository.findByInstagram(customerDTO.getInstagram());
-        if(ObjectUtils.isNotEmpty(checkExistCustomer) || StringUtils.isNotEmpty(customerDTO.getPhone())){
-            return "電話已註冊";
-        }
-        if (ObjectUtils.isNotEmpty(checkExistIg) || StringUtils.isNotEmpty(customerDTO.getInstagram())){
-            return "Instagram已註冊";
+        if (checkCustomerExist(customerDTO.getPhone(), customerDTO.getInstagram())){
+            return "電話/IG已被註冊";
         }
 
         Customer customer = new Customer(customerDTO);
@@ -49,6 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerByPhone(String phone) {
+        if (StringUtils.isEmpty(phone)){
+            return null;
+        }
         Customer customer = customerRepository.findByPhone(phone);
         return customer;
     }
@@ -56,5 +54,73 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getAllCustomer() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public String deleteCustomer(Integer customerId) {
+        try {
+            customerRepository.deleteById(customerId);
+            return null;
+        }catch (Exception e){
+            return "刪除失敗，客人有落訂單，請先刪除訂單";
+        }
+    }
+
+    @Override
+    public String modifyCustomer(CustomerDTO customerDTO) {
+
+        try {
+
+            if (StringUtils.isEmpty(customerDTO.getInstagram()) && StringUtils.isEmpty(customerDTO.getPhone())) {
+                return "電話 / Instagram 不能空白";
+            }
+
+            Customer customer = customerRepository.findById(customerDTO.getCustomerId()).orElseThrow();
+
+            if(!StringUtils.equals(customer.getPhone(),customerDTO.getPhone())){
+
+                Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
+                if(ObjectUtils.isNotEmpty(checkExistCustomer)){
+                    return "電話/IG已被註冊";
+                }
+
+            }
+
+
+            if (!StringUtils.equals(customer.getInstagram(),customerDTO.getInstagram())){
+                Customer checkExistIg = customerRepository.findByInstagram(customerDTO.getInstagram());
+
+                if (ObjectUtils.isNotEmpty(checkExistIg) ){
+                    return "電話/IG已被註冊";
+                }
+            }
+
+
+            customer.setPhone(customerDTO.getPhone());
+            customer.setInstagram(customerDTO.getInstagram());
+            customer.setRemark(customerDTO.getRemark());
+            customer.setShippingAddress(customerDTO.getShippingAddress());
+            customer.setModifyDate(new Date());
+
+            customerRepository.save(customer);
+
+            return null;
+        }catch (Exception e){
+            return "更改失敗";
+        }
+
+    }
+
+    public Boolean checkCustomerExist (String phone, String instagram){
+
+        Customer checkExistCustomer = customerRepository.findByPhone(phone);
+        Customer checkExistIg = customerRepository.findByInstagram(instagram);
+        if(ObjectUtils.isNotEmpty(checkExistCustomer) && StringUtils.isNotEmpty(phone)){
+            return true;
+        }
+        if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
+            return true;
+        }
+        return false;
     }
 }
