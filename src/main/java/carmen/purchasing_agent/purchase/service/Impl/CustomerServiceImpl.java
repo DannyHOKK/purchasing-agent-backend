@@ -131,14 +131,14 @@ public class CustomerServiceImpl implements CustomerService {
     public Boolean checkCustomerExistFunction (String phone, String instagram){
 
 
-        if (StringUtils.isEmpty(phone)){
+        if (!StringUtils.isEmpty(phone)){
             Customer checkExistIg = customerRepository.findByInstagram(instagram);
             if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
                 return true;
             }
         }
 
-        if (StringUtils.isEmpty(instagram)){
+        if (!StringUtils.isEmpty(instagram)){
 
             Customer checkExistCustomer = customerRepository.findByPhone(phone);
 
