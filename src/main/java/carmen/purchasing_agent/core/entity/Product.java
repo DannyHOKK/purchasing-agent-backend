@@ -44,7 +44,6 @@ public class Product {
         this.productType = productDTO.getProductType();
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
-        this.discount = (float) (productDTO.getDiscount() * 0.01);
     }
 
 

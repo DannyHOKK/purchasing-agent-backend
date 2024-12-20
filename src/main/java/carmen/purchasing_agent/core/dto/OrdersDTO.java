@@ -4,6 +4,7 @@ import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.core.entity.Product;
 
 public class OrdersDTO {
+    private Integer orderId;
     private String phone;
     private String instagram;
     private Boolean paid;
@@ -12,6 +13,14 @@ public class OrdersDTO {
     private Integer quantity;
     private String remark;
     private String productName;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
     public String getInstagram() {
         return instagram;

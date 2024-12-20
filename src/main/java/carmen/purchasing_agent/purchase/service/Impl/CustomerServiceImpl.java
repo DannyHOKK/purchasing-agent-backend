@@ -4,10 +4,12 @@ import carmen.purchasing_agent.core.dto.CustomerDTO;
 import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.purchase.repository.CustomerRepository;
 import carmen.purchasing_agent.purchase.service.CustomerService;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String createCustomer(CustomerDTO customerDTO) {
 
-        if (checkCustomerExist(customerDTO.getPhone(), customerDTO.getInstagram())){
+
+        if (StringUtils.isEmpty(customerDTO.getInstagram()) && StringUtils.isEmpty(customerDTO.getPhone())) {
+            return "電話 / Instagram 不能空白";
+        }
+
+        if (checkCustomerExistFunction(customerDTO.getPhone(), customerDTO.getInstagram())){
             return "電話/IG已被註冊";
         }
 
@@ -111,16 +118,36 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
-    public Boolean checkCustomerExist (String phone, String instagram){
+    @Override
+    public String checkCustomerExist(CustomerDTO customerDTO) {
+        Boolean exist = checkCustomerExistFunction(customerDTO.getPhone(),customerDTO.getInstagram());
+        if (BooleanUtils.isTrue(exist)){
+            return null;
+        }else{
+            return "客人資料存在";
+        }
+    }
 
-        Customer checkExistCustomer = customerRepository.findByPhone(phone);
-        Customer checkExistIg = customerRepository.findByInstagram(instagram);
-        if(ObjectUtils.isNotEmpty(checkExistCustomer) && StringUtils.isNotEmpty(phone)){
-            return true;
+    public Boolean checkCustomerExistFunction (String phone, String instagram){
+
+
+        if (StringUtils.isEmpty(phone)){
+            Customer checkExistIg = customerRepository.findByInstagram(instagram);
+            if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
+                return true;
+            }
         }
-        if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
-            return true;
+
+        if (StringUtils.isEmpty(instagram)){
+
+            Customer checkExistCustomer = customerRepository.findByPhone(phone);
+
+            if(ObjectUtils.isNotEmpty(checkExistCustomer) && StringUtils.isNotEmpty(phone)){
+                return true;
+            }
         }
+
+
         return false;
     }
 }

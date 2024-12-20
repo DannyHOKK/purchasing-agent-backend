@@ -69,7 +69,7 @@ public class CustomerController {
             String errMsg = customerService.createCustomer(customerDTO);
 
             if (StringUtils.isNotEmpty(errMsg)){
-                return ResultVoUtil.error("保存失敗");
+                return ResultVoUtil.error(errMsg);
             }
             return ResultVoUtil.success("成功保存");
         }catch (Exception e){
@@ -102,6 +102,21 @@ public class CustomerController {
                 return ResultVoUtil.error(errMsg);
             }
             return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
+
+    @PostMapping("/checkCustomerExist")
+    public ResultVO checkCustomerExist(@RequestBody CustomerDTO customerDTO){
+        try {
+            String errMsg = customerService.checkCustomerExist(customerDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功");
         }catch (Exception e){
             return ResultVoUtil.error();
         }

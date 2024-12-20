@@ -11,4 +11,9 @@ public interface OrdersService {
     List<Orders> getAllOrders();
 
     String deleteOrderById(Integer orderId);
+
+
+    String changeStatusOrder(OrdersDTO ordersDTO);
+
+    String modifyOrder(OrdersDTO ordersDTO);
 }

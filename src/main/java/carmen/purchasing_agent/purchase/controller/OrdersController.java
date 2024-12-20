@@ -62,5 +62,33 @@ public class OrdersController {
         }
     }
 
+    @PostMapping("/changeStatusOrder")
+    public ResultVO changeStatusOrder(@RequestBody OrdersDTO ordersDTO){
+        try {
+            String errMsg = ordersService.changeStatusOrder(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
+
+    @PostMapping("/modifyOrder")
+    public ResultVO modifyOrder(@RequestBody OrdersDTO ordersDTO){
+        try {
+            String errMsg = ordersService.modifyOrder(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
 
 }

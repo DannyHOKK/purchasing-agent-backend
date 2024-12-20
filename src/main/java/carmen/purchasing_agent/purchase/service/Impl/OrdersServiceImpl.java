@@ -8,6 +8,7 @@ import carmen.purchasing_agent.purchase.repository.CustomerRepository;
 import carmen.purchasing_agent.purchase.repository.OrdersRepository;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
 import carmen.purchasing_agent.purchase.service.OrdersService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,50 @@ public class OrdersServiceImpl implements OrdersService {
             return "刪除失敗";
         }
 
+    }
+
+    @Override
+    public String changeStatusOrder(OrdersDTO ordersDTO) {
+        try {
+            Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
+
+            orders.setPaid(ordersDTO.getPaid());
+            orders.setModifyDate(new Date());
+
+            ordersRepository.save(orders);
+
+            return null;
+
+        }catch (Exception e){
+            return "更改失敗";
+        }
+    }
+
+    @Override
+    public String modifyOrder(OrdersDTO ordersDTO) {
+
+        try {
+            Orders order = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
+
+            Product product = productRepository.findByProductName(ordersDTO.getProductName());
+
+            if (ObjectUtils.isEmpty(order) || ObjectUtils.isEmpty(product))
+            {
+                return "貨品 / 訂單不正確";
+            }
+            order.setPaid(ordersDTO.getPaid());
+            order.setModifyDate(new Date());
+            order.setPaid(ordersDTO.getPaid());
+            order.setProduct(product);
+            order.setQuantity(ordersDTO.getQuantity());
+            order.setPaymentMethod(ordersDTO.getPaymentMethod());
+            order.setTakeMethod(ordersDTO.getTakeMethod());
+            order.setRemark(ordersDTO.getRemark());
+            ordersRepository.save(order);
+
+            return null;
+        }catch (Exception e){
+            return "更改失敗";
+        }
     }
 }

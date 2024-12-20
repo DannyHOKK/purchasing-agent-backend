@@ -17,4 +17,6 @@ public interface CustomerService {
     String deleteCustomer(Integer customerId);
 
     String modifyCustomer(CustomerDTO customerDTO);
+
+    String checkCustomerExist(CustomerDTO customerDTO);
 }
