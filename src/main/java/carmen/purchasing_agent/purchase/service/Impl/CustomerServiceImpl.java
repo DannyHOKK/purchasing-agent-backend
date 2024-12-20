@@ -132,17 +132,17 @@ public class CustomerServiceImpl implements CustomerService {
 
 
         if (!StringUtils.isEmpty(phone)){
-            Customer checkExistIg = customerRepository.findByInstagram(instagram);
-            if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
+            Customer checkExistCustomer = customerRepository.findByPhone(phone);
+
+            if(ObjectUtils.isNotEmpty(checkExistCustomer) && StringUtils.isNotEmpty(phone)){
                 return true;
             }
         }
 
         if (!StringUtils.isEmpty(instagram)){
 
-            Customer checkExistCustomer = customerRepository.findByPhone(phone);
-
-            if(ObjectUtils.isNotEmpty(checkExistCustomer) && StringUtils.isNotEmpty(phone)){
+            Customer checkExistIg = customerRepository.findByInstagram(instagram);
+            if (ObjectUtils.isNotEmpty(checkExistIg) && StringUtils.isNotEmpty(instagram)){
                 return true;
             }
         }
