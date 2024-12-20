@@ -16,4 +16,6 @@ public interface OrdersService {
     String changeStatusOrder(OrdersDTO ordersDTO);
 
     String modifyOrder(OrdersDTO ordersDTO);
+
+    String changePaidOrder(OrdersDTO ordersDTO);
 }

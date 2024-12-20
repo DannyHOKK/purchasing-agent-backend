@@ -51,11 +51,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setQuantity(orders.getQuantity());
         orders.setCreateDate(new Date());
         orders.setModifyDate(new Date());
-        if (orders.getPaid() == true){
-            orders.setStatus("已付款");
-        }else {
-            orders.setStatus("未付款");
-        }
+        orders.setStatus("備貨中");
 
         product.setQuantity(orders.getQuantity());
         productRepository.save(product);
@@ -89,8 +85,8 @@ public class OrdersServiceImpl implements OrdersService {
         try {
             Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
 
-            orders.setPaid(ordersDTO.getPaid());
             orders.setModifyDate(new Date());
+            orders.setStatus(ordersDTO.getStatus());
 
             ordersRepository.save(orders);
 
@@ -124,6 +120,23 @@ public class OrdersServiceImpl implements OrdersService {
             ordersRepository.save(order);
 
             return null;
+        }catch (Exception e){
+            return "更改失敗";
+        }
+    }
+
+    @Override
+    public String changePaidOrder(OrdersDTO ordersDTO) {
+        try {
+            Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
+
+            orders.setPaid(ordersDTO.getPaid());
+            orders.setModifyDate(new Date());
+
+            ordersRepository.save(orders);
+
+            return null;
+
         }catch (Exception e){
             return "更改失敗";
         }

@@ -77,6 +77,21 @@ public class OrdersController {
     }
 
 
+    @PostMapping("/changePaidOrder")
+    public ResultVO changePaidOrder(@RequestBody OrdersDTO ordersDTO){
+        try {
+            String errMsg = ordersService.changePaidOrder(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
+
     @PostMapping("/modifyOrder")
     public ResultVO modifyOrder(@RequestBody OrdersDTO ordersDTO){
         try {
@@ -90,5 +105,7 @@ public class OrdersController {
             return ResultVoUtil.error();
         }
     }
+
+
 
 }
