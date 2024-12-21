@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
         product.setQuantity(0);
 
+        product.setDiscount(productDTO.getDiscount());
         product.setStock(productDTO.getStock());
         product.setCreateDate(new Date());
         product.setModifyDate(new Date());
