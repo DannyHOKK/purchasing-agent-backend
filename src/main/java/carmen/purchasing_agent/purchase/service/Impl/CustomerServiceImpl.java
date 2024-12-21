@@ -86,19 +86,27 @@ public class CustomerServiceImpl implements CustomerService {
 
             if(!StringUtils.equals(customer.getPhone(),customerDTO.getPhone())){
 
-                Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
-                if(ObjectUtils.isNotEmpty(checkExistCustomer)){
-                    return "電話/IG已被註冊";
+                if (StringUtils.isNotEmpty(customerDTO.getPhone())){
+
+                    Customer checkExistCustomer = customerRepository.findByPhone(customerDTO.getPhone());
+                    if(ObjectUtils.isNotEmpty(checkExistCustomer)){
+                        return "電話/IG已被註冊";
+                    }
                 }
 
             }
 
 
             if (!StringUtils.equals(customer.getInstagram(),customerDTO.getInstagram())){
-                Customer checkExistIg = customerRepository.findByInstagram(customerDTO.getInstagram());
 
-                if (ObjectUtils.isNotEmpty(checkExistIg) ){
-                    return "電話/IG已被註冊";
+                if (StringUtils.isNotEmpty(customerDTO.getInstagram())){
+
+                    Customer checkExistIg = customerRepository.findByInstagram(customerDTO.getInstagram());
+
+                    if (ObjectUtils.isNotEmpty(checkExistIg) ){
+                        return "電話/IG已被註冊";
+                    }
+
                 }
             }
 
