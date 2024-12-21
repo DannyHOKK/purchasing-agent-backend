@@ -131,6 +131,11 @@ public class OrdersServiceImpl implements OrdersService {
         try {
             Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
 
+
+            if (StringUtils.equals(ordersDTO.getPaid(),"已付款")){
+                orders.setCreateDate(new Date());
+            }
+
             orders.setPaid(ordersDTO.getPaid());
             orders.setModifyDate(new Date());
 
@@ -147,6 +152,7 @@ public class OrdersServiceImpl implements OrdersService {
     public String changeTakeMethodOrder(OrdersDTO ordersDTO) {
         try {
             Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
+
 
             orders.setTakeMethod(ordersDTO.getTakeMethod());
             orders.setModifyDate(new Date());
