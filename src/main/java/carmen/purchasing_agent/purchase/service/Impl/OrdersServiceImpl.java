@@ -46,7 +46,7 @@ public class OrdersServiceImpl implements OrdersService {
         }
 
         orders.setCustomer(customer);
-
+        orders.setOrderPlatform(ordersDTO.getOrderPlatform());
         orders.setProduct(product);
         orders.setQuantity(orders.getQuantity());
         orders.setCreateDate(new Date());
@@ -110,6 +110,7 @@ public class OrdersServiceImpl implements OrdersService {
                 return "貨品 / 訂單不正確";
             }
             order.setPaid(ordersDTO.getPaid());
+            order.setOrderPlatform(ordersDTO.getOrderPlatform());
             order.setModifyDate(new Date());
             order.setPaid(ordersDTO.getPaid());
             order.setProduct(product);

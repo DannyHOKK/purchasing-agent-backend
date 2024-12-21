@@ -15,7 +15,8 @@ public class Orders {
     @Column(name = "ORDER_ID")
     private Integer orderId;
     private Integer quantity;
-    private Boolean paid;
+    private String paid;
+    private String orderPlatform;
     private Date createDate;
     private Date modifyDate;
     private String takeMethod;
@@ -29,6 +30,7 @@ public class Orders {
     @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "CUSTOMER_ID")
     private Customer customer;
 
+
     public Orders() {
     }
 
@@ -40,7 +42,7 @@ public class Orders {
         this.quantity = ordersDTO.getQuantity();
     }
 
-    public Orders(Integer orderId, Integer quantity, Boolean paid, Date createDate, Date modifyDate, String takeMethod, String paymentMethod, String remark, String status, Product product, Customer customer) {
+    public Orders(Integer orderId, Integer quantity, String paid, Date createDate, Date modifyDate, String takeMethod, String paymentMethod, String remark, String status, Product product, Customer customer) {
         this.orderId = orderId;
         this.quantity = quantity;
         this.paid = paid;
@@ -52,6 +54,14 @@ public class Orders {
         this.status = status;
         this.product = product;
         this.customer = customer;
+    }
+
+    public String getOrderPlatform() {
+        return orderPlatform;
+    }
+
+    public void setOrderPlatform(String orderPlatform) {
+        this.orderPlatform = orderPlatform;
     }
 
     public Integer getQuantity() {
@@ -70,11 +80,11 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public Boolean getPaid() {
+    public String getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(String paid) {
         this.paid = paid;
     }
 

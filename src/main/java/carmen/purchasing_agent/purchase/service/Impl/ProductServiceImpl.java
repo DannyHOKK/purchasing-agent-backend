@@ -23,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = new Product(productDTO);
 
+        Product checkProduct = productRepository.findByProductName(productDTO.getProductName());
+        if (ObjectUtils.isNotEmpty(checkProduct)){
+            return "貸品名稱重複";
+        }
+
         product.setQuantity(0);
 
         product.setDiscount(productDTO.getDiscount());
@@ -44,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (!StringUtils.equals(product.getProductName(),productDTO.getProductName())){
             if(ObjectUtils.isNotEmpty(checkProductName)){
-                return "產品名已被註冊";
+                return "貸品名稱重複";
             }
         }
         product.setProductBrand(productDTO.getProductBrand());

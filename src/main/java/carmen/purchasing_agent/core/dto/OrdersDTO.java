@@ -7,13 +7,22 @@ public class OrdersDTO {
     private Integer orderId;
     private String phone;
     private String instagram;
-    private Boolean paid;
+    private String paid;
+    private String orderPlatform;
     private String takeMethod;
     private String paymentMethod;
     private Integer quantity;
     private String remark;
     private String productName;
     private String status;
+
+    public String getOrderPlatform() {
+        return orderPlatform;
+    }
+
+    public void setOrderPlatform(String orderPlatform) {
+        this.orderPlatform = orderPlatform;
+    }
 
     public String getStatus() {
         return status;
@@ -67,11 +76,11 @@ public class OrdersDTO {
         this.quantity = quantity;
     }
 
-    public Boolean getPaid() {
+    public String getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(String paid) {
         this.paid = paid;
     }
 
