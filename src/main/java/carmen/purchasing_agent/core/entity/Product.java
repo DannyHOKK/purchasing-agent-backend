@@ -30,6 +30,8 @@ public class Product {
     private Integer quantity;
     @Column(name = "STOCK")
     private Integer stock;
+    @Column(name = "COMMISSION")
+    private Boolean commission;
     @Column(name = "CREATE_DATE")
     private Date createDate;
     @Column(name = "MODIFY_DATE")
@@ -44,8 +46,16 @@ public class Product {
         this.productType = productDTO.getProductType();
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
+        this.commission = productDTO.getCommission();
     }
 
+    public Boolean getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Boolean commission) {
+        this.commission = commission;
+    }
 
     public Float getDiscount() {
         return discount;

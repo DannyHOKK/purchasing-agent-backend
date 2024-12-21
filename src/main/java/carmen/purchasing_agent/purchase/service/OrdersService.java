@@ -18,4 +18,6 @@ public interface OrdersService {
     String modifyOrder(OrdersDTO ordersDTO);
 
     String changePaidOrder(OrdersDTO ordersDTO);
+
+    String changeTakeMethodOrder(OrdersDTO ordersDTO);
 }

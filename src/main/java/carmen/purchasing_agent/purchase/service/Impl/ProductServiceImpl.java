@@ -52,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
                 return "貸品名稱重複";
             }
         }
+        product.setCommission(productDTO.getCommission());
         product.setProductBrand(productDTO.getProductBrand());
         product.setProductType(productDTO.getProductType());
         product.setProductName(productDTO.getProductName());

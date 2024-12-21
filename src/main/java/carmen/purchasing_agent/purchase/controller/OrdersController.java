@@ -107,5 +107,18 @@ public class OrdersController {
     }
 
 
+    @PostMapping("/changeTakeMethodOrder")
+    public ResultVO changeTakeMethodOrder(@RequestBody OrdersDTO ordersDTO){
+        try {
+            String errMsg = ordersService.changeTakeMethodOrder(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
 
 }

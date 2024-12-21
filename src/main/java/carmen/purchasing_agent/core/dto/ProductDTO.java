@@ -13,6 +13,15 @@ public class ProductDTO {
     private Integer productPrice;
     private Integer quantity;
     private Integer stock;
+    private Boolean commission;
+
+    public Boolean getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Boolean commission) {
+        this.commission = commission;
+    }
 
     public Float getDiscount() {
         return discount;
