@@ -1,5 +1,6 @@
 package carmen.purchasing_agent.core.entity;
 
+import carmen.purchasing_agent.core.dto.ExchangeRateDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -16,6 +17,11 @@ public class ExchangeRate {
     private Date modifyDate;
 
     public ExchangeRate() {
+    }
+
+    public ExchangeRate(ExchangeRateDTO exchangeRateDTO) {
+        this.currency = exchangeRateDTO.getCurrency();
+        this.exchangeRate = exchangeRateDTO.getExchangeRate();
     }
 
     public String getCurrency() {
