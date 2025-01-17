@@ -9,4 +9,6 @@ public interface ExchangeRateService {
     String createCurrency(ExchangeRateDTO exchangeRateDTO);
 
     List<ExchangeRate> getExchangeRate();
+
+    String deleteExchange(String currency);
 }

@@ -44,4 +44,15 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
             return null;
         }
     }
+
+    @Override
+    public String deleteExchange(String currency) {
+        try {
+            exchangeRateRepository.deleteById(currency);
+            return null;
+
+        }catch (Exception e){
+            return "刪除失敗";
+        }
+    }
 }

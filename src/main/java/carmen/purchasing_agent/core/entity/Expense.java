@@ -3,6 +3,7 @@ package carmen.purchasing_agent.core.entity;
 import carmen.purchasing_agent.core.dto.ExpenseDTO;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,18 +17,20 @@ public class Expense {
     private String consumeType;
     private Integer consumeCost;
     private String payment;
+    private LocalDate payDate;
     private Date createDate;
     private Date modifyDate;
 
     public Expense() {
     }
 
-    public Expense(Integer expenseId, String shopName, String consumeType, Integer consumeCost, String payment, Date createDate, Date modifyDate) {
+    public Expense(Integer expenseId, String shopName, String consumeType, Integer consumeCost, String payment, LocalDate payDate, Date createDate, Date modifyDate) {
         this.expenseId = expenseId;
         this.shopName = shopName;
         this.consumeType = consumeType;
         this.consumeCost = consumeCost;
         this.payment = payment;
+        this.payDate = payDate;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
     }
@@ -37,6 +40,15 @@ public class Expense {
         this.consumeCost = expenseDTO.getConsumeCost();
         this.payment = expenseDTO.getPayment();
         this.shopName = expenseDTO.getShopName();
+        this.payDate = expenseDTO.getPayDate();
+    }
+
+    public LocalDate getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(LocalDate payDate) {
+        this.payDate = payDate;
     }
 
     public String getShopName() {

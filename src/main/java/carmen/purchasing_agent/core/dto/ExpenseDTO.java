@@ -1,5 +1,7 @@
 package carmen.purchasing_agent.core.dto;
 
+import java.time.LocalDate;
+
 public class ExpenseDTO {
 
     private Integer expenseId;
@@ -7,6 +9,15 @@ public class ExpenseDTO {
     private String consumeType;
     private Integer consumeCost;
     private String payment;
+    private LocalDate payDate;
+
+    public LocalDate getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(LocalDate payDate) {
+        this.payDate = payDate;
+    }
 
     public String getShopName() {
         return shopName;
