@@ -48,4 +48,19 @@ public class ExchangeRateController {
             return ResultVoUtil.error();
         }
     }
+
+    @DeleteMapping("/deleteExchange/{currency}")
+    public ResultVO deleteExchange(@PathVariable String currency){
+        try {
+            String errMsg = exchangeRateService.deleteExchange(currency);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("刪除成功");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
 }
