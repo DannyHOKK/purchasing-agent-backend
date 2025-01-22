@@ -63,7 +63,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> getAllOrders() {
 
-        List<Orders> ordersList = ordersRepository.findAll();
+        List<Orders> ordersList = ordersRepository.findAllDescOrder();
 
         return ordersList;
     }

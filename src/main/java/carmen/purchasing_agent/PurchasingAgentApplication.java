@@ -11,7 +11,7 @@ public class PurchasingAgentApplication {
 
 
 	@PostConstruct
-	public void initTwilio(){
+	public void setTimeZone(){
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Hong_Kong"));
 	}
 
