@@ -1,7 +1,9 @@
 package carmen.purchasing_agent.purchase.service.Impl;
 
 import carmen.purchasing_agent.core.dto.ExpenseDTO;
+import carmen.purchasing_agent.core.entity.ExchangeRate;
 import carmen.purchasing_agent.core.entity.Expense;
+import carmen.purchasing_agent.purchase.repository.ExchangeRateRepository;
 import carmen.purchasing_agent.purchase.repository.ExpenseRepository;
 import carmen.purchasing_agent.purchase.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,17 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+    @Autowired
+    private ExchangeRateRepository exchangeRateRepository;
     @Override
     public String createConsumption(ExpenseDTO expenseDTO) {
 
         try {
+
+            ExchangeRate exchangeRate =  exchangeRateRepository.getReferenceById(expenseDTO.getCurrency());
+
             Expense expense = new Expense(expenseDTO);
+            expense.setExchangeRate(exchangeRate);
             expense.setCreateDate(new Date());
             expense.setModifyDate(new Date());
 
@@ -35,7 +43,8 @@ public class ExpenseServiceImpl implements ExpenseService {
     public String modifyConsumption(ExpenseDTO expenseDTO) {
         try {
             Expense expense = expenseRepository.findById(expenseDTO.getExpenseId()).orElseThrow();
-
+            ExchangeRate exchangeRate =  exchangeRateRepository.getReferenceById(expenseDTO.getCurrency());
+            expense.setExchangeRate(exchangeRate);
             expense.setConsumeCost(expenseDTO.getConsumeCost());
             expense.setPayment(expenseDTO.getPayment());
             expense.setShopName(expenseDTO.getShopName());

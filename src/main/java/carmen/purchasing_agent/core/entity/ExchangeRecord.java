@@ -16,7 +16,7 @@ public class ExchangeRecord {
     private Integer exchangeId;
     private String currency;
     private Integer exchangeCost;
-    private Integer exchangeRate;
+    private Double exchangeRate;
     private LocalDate exchangeDate;
     private Date createDate;
 
@@ -30,7 +30,7 @@ public class ExchangeRecord {
         this.exchangeDate = exchangeRecordDTO.getExchangeDate();
     }
 
-    public ExchangeRecord(Integer exchangeId, String currency, Integer exchangeCost, Integer exchangeRate, LocalDate exchangeDate, Date createDate) {
+    public ExchangeRecord(Integer exchangeId, String currency, Integer exchangeCost, Double exchangeRate, LocalDate exchangeDate, Date createDate) {
         this.exchangeId = exchangeId;
         this.currency = currency;
         this.exchangeCost = exchangeCost;
@@ -63,11 +63,11 @@ public class ExchangeRecord {
         this.exchangeCost = exchangeCost;
     }
 
-    public Integer getExchangeRate() {
+    public Double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Integer exchangeRate) {
+    public void setExchangeRate(Double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 

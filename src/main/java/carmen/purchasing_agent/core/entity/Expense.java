@@ -16,6 +16,9 @@ public class Expense {
     private String shopName;
     private String consumeType;
     private Integer consumeCost;
+    @ManyToOne
+    @JoinColumn(name = "CURRENCY", referencedColumnName = "CURRENCY")
+    private ExchangeRate exchangeRate;
     private String payment;
     private LocalDate payDate;
     private Date createDate;
@@ -24,11 +27,12 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(Integer expenseId, String shopName, String consumeType, Integer consumeCost, String payment, LocalDate payDate, Date createDate, Date modifyDate) {
+    public Expense(Integer expenseId, String shopName, String consumeType, Integer consumeCost, ExchangeRate exchangeRate, String payment, LocalDate payDate, Date createDate, Date modifyDate) {
         this.expenseId = expenseId;
         this.shopName = shopName;
         this.consumeType = consumeType;
         this.consumeCost = consumeCost;
+        this.exchangeRate = exchangeRate;
         this.payment = payment;
         this.payDate = payDate;
         this.createDate = createDate;
@@ -41,6 +45,14 @@ public class Expense {
         this.payment = expenseDTO.getPayment();
         this.shopName = expenseDTO.getShopName();
         this.payDate = expenseDTO.getPayDate();
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
     }
 
     public LocalDate getPayDate() {

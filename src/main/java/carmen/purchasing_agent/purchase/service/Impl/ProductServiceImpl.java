@@ -1,7 +1,9 @@
 package carmen.purchasing_agent.purchase.service.Impl;
 
 import carmen.purchasing_agent.core.dto.ProductDTO;
+import carmen.purchasing_agent.core.entity.ExchangeRate;
 import carmen.purchasing_agent.core.entity.Product;
+import carmen.purchasing_agent.purchase.repository.ExchangeRateRepository;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
 import org.apache.commons.lang3.ObjectUtils;
@@ -18,6 +20,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ExchangeRateRepository exchangeRateRepository;
+
     @Override
     public String createProduct(ProductDTO productDTO) {
 
@@ -28,8 +34,10 @@ public class ProductServiceImpl implements ProductService {
             return "貸品名稱重複";
         }
 
-        product.setQuantity(0);
+        ExchangeRate exchangeRate = exchangeRateRepository.getReferenceById(productDTO.getCurrency());
 
+        product.setQuantity(0);
+        product.setExchangeRate(exchangeRate);
         product.setDiscount(productDTO.getDiscount());
         product.setStock(productDTO.getStock());
         product.setCreateDate(new Date());
@@ -52,6 +60,10 @@ public class ProductServiceImpl implements ProductService {
                 return "貸品名稱重複";
             }
         }
+
+        ExchangeRate exchangeRate = exchangeRateRepository.getReferenceById(productDTO.getCurrency());
+
+        product.setExchangeRate(exchangeRate);
         product.setCommission(productDTO.getCommission());
         product.setProductBrand(productDTO.getProductBrand());
         product.setProductType(productDTO.getProductType());

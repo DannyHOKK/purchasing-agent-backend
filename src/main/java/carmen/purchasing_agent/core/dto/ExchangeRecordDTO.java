@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ExchangeRecordDTO {
     private String currency;
     private Integer exchangeCost;
-    private Integer exchangeRate;
+    private Double exchangeRate;
     private LocalDate exchangeDate;
 
     public String getCurrency() {
@@ -24,11 +24,11 @@ public class ExchangeRecordDTO {
         this.exchangeCost = exchangeCost;
     }
 
-    public Integer getExchangeRate() {
+    public Double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Integer exchangeRate) {
+    public void setExchangeRate(Double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 

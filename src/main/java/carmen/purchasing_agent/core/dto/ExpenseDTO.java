@@ -8,8 +8,17 @@ public class ExpenseDTO {
     private String shopName;
     private String consumeType;
     private Integer consumeCost;
+    private String currency;
     private String payment;
     private LocalDate payDate;
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
     public LocalDate getPayDate() {
         return payDate;

@@ -5,6 +5,7 @@ import lombok.*;
 
 public class ProductDTO {
     private Integer productId;
+    private String currency;
     private String productBrand;
     private String productName;
     private String productType;
@@ -14,6 +15,15 @@ public class ProductDTO {
     private Integer quantity;
     private Integer stock;
     private Boolean commission;
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
 
     public Boolean getCommission() {
         return commission;

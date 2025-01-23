@@ -53,7 +53,7 @@ public class ProductController {
             String errMsg = productService.createProduct(productDTO);
 
             if (StringUtils.isNotEmpty(errMsg)){
-                return ResultVoUtil.error("保存失敗");
+                return ResultVoUtil.error(errMsg);
             }
             return ResultVoUtil.success("成功保存");
         }catch (Exception e){

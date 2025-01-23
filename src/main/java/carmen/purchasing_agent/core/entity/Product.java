@@ -14,6 +14,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Integer productId;
+    @ManyToOne
+    @JoinColumn(name = "CURRENCY", referencedColumnName = "CURRENCY")
+    private ExchangeRate exchangeRate;
     @Column(name = "PRODUCT_BRAND")
     private String productBrand;
     @Column(name = "PRODUCT_NAME")
@@ -47,6 +50,14 @@ public class Product {
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
         this.commission = productDTO.getCommission();
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
     }
 
     public Boolean getCommission() {
