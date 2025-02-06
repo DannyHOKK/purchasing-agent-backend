@@ -25,6 +25,8 @@ public class Product {
     private String productType;
     @Column(name = "PRODUCT_COST")
     private String productCost;
+    @Column(name = "WEIGHT")
+    private Double weight;
     @Column(name = "DISCOUNT")
     private Float discount;
     @Column(name = "PRODUCT_PRICE")
@@ -50,6 +52,15 @@ public class Product {
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
         this.commission = productDTO.getCommission();
+        this.weight = productDTO.getWeight();
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public ExchangeRate getExchangeRate() {

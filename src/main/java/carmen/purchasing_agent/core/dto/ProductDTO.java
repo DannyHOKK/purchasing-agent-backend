@@ -10,11 +10,20 @@ public class ProductDTO {
     private String productName;
     private String productType;
     private String productCost;
+    private Double weight;
     private Float discount;
     private Integer productPrice;
     private Integer quantity;
     private Integer stock;
     private Boolean commission;
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
 
     public String getCurrency() {
         return currency;

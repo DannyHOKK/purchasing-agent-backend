@@ -12,7 +12,7 @@ import java.util.Date;
 public class ExchangeRate {
     @Id
     private String currency;
-    private Integer exchangeRate;
+    private Double exchangeRate;
     private Date createDate;
     private Date modifyDate;
 
@@ -32,11 +32,11 @@ public class ExchangeRate {
         this.currency = currency;
     }
 
-    public Integer getExchangeRate() {
+    public Double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Integer exchangeRate) {
+    public void setExchangeRate(Double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 

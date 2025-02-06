@@ -2,7 +2,7 @@ package carmen.purchasing_agent.core.dto;
 
 public class ExchangeRateDTO {
     private String currency;
-    private Integer exchangeRate;
+    private Double exchangeRate;
 
     public String getCurrency() {
         return currency;
@@ -12,11 +12,11 @@ public class ExchangeRateDTO {
         this.currency = currency;
     }
 
-    public Integer getExchangeRate() {
+    public Double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Integer exchangeRate) {
+    public void setExchangeRate(Double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 }
