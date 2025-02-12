@@ -165,4 +165,21 @@ public class OrdersServiceImpl implements OrdersService {
             return "更改失敗";
         }
     }
+
+    @Override
+    public String changePaymentMethod(OrdersDTO ordersDTO) {
+        try {
+            Orders orders = ordersRepository.findById(ordersDTO.getOrderId()).orElseThrow();
+
+
+            orders.setPaymentMethod(ordersDTO.getPaymentMethod());
+
+            ordersRepository.save(orders);
+
+            return null;
+
+        }catch (Exception e){
+            return "更改失敗";
+        }
+    }
 }

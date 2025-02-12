@@ -3,6 +3,8 @@ package carmen.purchasing_agent.core.dto;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.util.List;
+
 public class ProductDTO {
     private Integer productId;
     private String currency;
@@ -16,6 +18,15 @@ public class ProductDTO {
     private Integer quantity;
     private Integer stock;
     private Boolean commission;
+    private List<String> productColor;
+
+    public List<String> getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(List<String> productColor) {
+        this.productColor = productColor;
+    }
 
     public Double getWeight() {
         return weight;

@@ -121,4 +121,18 @@ public class OrdersController {
         }
     }
 
+    @PostMapping("/changePaymentMethod")
+    public ResultVO changePaymentMethod(@RequestBody OrdersDTO ordersDTO){
+        try {
+            String errMsg = ordersService.changePaymentMethod(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
 }

@@ -6,9 +6,11 @@ import carmen.purchasing_agent.core.entity.Product;
 import carmen.purchasing_agent.purchase.repository.ExchangeRateRepository;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,25 +27,54 @@ public class ProductServiceImpl implements ProductService {
     private ExchangeRateRepository exchangeRateRepository;
 
     @Override
+    @Transactional
     public String createProduct(ProductDTO productDTO) {
 
-        Product product = new Product(productDTO);
 
-        Product checkProduct = productRepository.findByProductName(productDTO.getProductName());
-        if (ObjectUtils.isNotEmpty(checkProduct)){
-            return "貸品名稱重複";
-        }
+
 
         ExchangeRate exchangeRate = exchangeRateRepository.getReferenceById(productDTO.getCurrency());
 
-        product.setQuantity(0);
-        product.setExchangeRate(exchangeRate);
-        product.setDiscount(productDTO.getDiscount());
-        product.setStock(productDTO.getStock());
-        product.setCreateDate(new Date());
-        product.setModifyDate(new Date());
+        if (productDTO.getProductColor() == null || productDTO.getProductColor().isEmpty()){
 
-        productRepository.save(product);
+            Product checkProduct = productRepository.findByProductName(productDTO.getProductName());
+            if (ObjectUtils.isNotEmpty(checkProduct)){
+                return "貸品名稱重複";
+            }
+
+
+            Product product = new Product(productDTO);
+
+            product.setProductName(productDTO.getProductName());
+            product.setQuantity(0);
+            product.setExchangeRate(exchangeRate);
+            product.setDiscount(productDTO.getDiscount());
+            product.setStock(productDTO.getStock());
+            product.setCreateDate(new Date());
+            product.setModifyDate(new Date());
+
+            productRepository.save(product);
+        }else{
+            for (int i = 0 ; i < productDTO.getProductColor().size(); i++){
+
+                Product checkProduct = productRepository.findByProductName(productDTO.getProductName() + " | " + productDTO.getProductColor().get(i));
+                if (ObjectUtils.isNotEmpty(checkProduct)){
+                    return "貸品名稱重複";
+                }
+
+                Product product = new Product(productDTO);
+
+                product.setProductName(productDTO.getProductName() + " | " + productDTO.getProductColor().get(i));
+                product.setQuantity(0);
+                product.setExchangeRate(exchangeRate);
+                product.setDiscount(productDTO.getDiscount());
+                product.setStock(productDTO.getStock());
+                product.setCreateDate(new Date());
+                product.setModifyDate(new Date());
+
+                productRepository.save(product);
+            }
+        }
 
         return null;
     }
@@ -101,6 +132,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProductList() {
 
-        return productRepository.findAll();
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "productBrand"));
     }
 }

@@ -47,7 +47,6 @@ public class Product {
 
     public Product(ProductDTO productDTO) {
         this.productBrand = productDTO.getProductBrand();
-        this.productName = productDTO.getProductName();
         this.productType = productDTO.getProductType();
         this.productCost = productDTO.getProductCost();
         this.productPrice = productDTO.getProductPrice();
