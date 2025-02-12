@@ -46,7 +46,6 @@ public class ProductServiceImpl implements ProductService {
             Product product = new Product(productDTO);
 
             product.setProductName(productDTO.getProductName());
-            product.setQuantity(0);
             product.setExchangeRate(exchangeRate);
             product.setDiscount(productDTO.getDiscount());
             product.setStock(productDTO.getStock());
@@ -65,7 +64,6 @@ public class ProductServiceImpl implements ProductService {
                 Product product = new Product(productDTO);
 
                 product.setProductName(productDTO.getProductName() + " | " + productDTO.getProductColor().get(i));
-                product.setQuantity(0);
                 product.setExchangeRate(exchangeRate);
                 product.setDiscount(productDTO.getDiscount());
                 product.setStock(productDTO.getStock());
@@ -102,7 +100,6 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCost(productDTO.getProductCost());
         product.setWeight(productDTO.getWeight());
         product.setProductPrice(productDTO.getProductPrice());
-        product.setQuantity(productDTO.getQuantity());
         product.setDiscount(productDTO.getDiscount());
         product.setModifyDate(new Date());
         product.setStock(productDTO.getStock());

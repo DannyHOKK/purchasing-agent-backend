@@ -31,8 +31,6 @@ public class Product {
     private Float discount;
     @Column(name = "PRODUCT_PRICE")
     private Integer productPrice;
-    @Column(name = "QUANTITY")
-    private Integer quantity;
     @Column(name = "STOCK")
     private Integer stock;
     @Column(name = "COMMISSION")
@@ -132,14 +130,6 @@ public class Product {
 
     public void setProductPrice(Integer productPrice) {
         this.productPrice = productPrice;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Date getCreateDate() {

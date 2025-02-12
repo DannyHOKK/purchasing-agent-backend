@@ -15,7 +15,6 @@ public class ProductDTO {
     private Double weight;
     private Float discount;
     private Integer productPrice;
-    private Integer quantity;
     private Integer stock;
     private Boolean commission;
     private List<String> productColor;
@@ -115,13 +114,5 @@ public class ProductDTO {
 
     public void setProductPrice(Integer productPrice) {
         this.productPrice = productPrice;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 }

@@ -53,7 +53,6 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setModifyDate(new Date());
         orders.setStatus("備貨中");
 
-        product.setQuantity(orders.getQuantity());
         productRepository.save(product);
         ordersRepository.save(orders);
 
