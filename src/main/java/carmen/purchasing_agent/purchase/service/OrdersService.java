@@ -1,5 +1,6 @@
 package carmen.purchasing_agent.purchase.service;
 
+import carmen.purchasing_agent.core.dto.OrderPackagingDTO;
 import carmen.purchasing_agent.core.dto.OrdersDTO;
 import carmen.purchasing_agent.core.entity.Orders;
 
@@ -22,4 +23,6 @@ public interface OrdersService {
     String changeTakeMethodOrder(OrdersDTO ordersDTO);
 
     String changePaymentMethod(OrdersDTO ordersDTO);
+
+    String batchPackaging(OrderPackagingDTO orderPackagingDTO);
 }

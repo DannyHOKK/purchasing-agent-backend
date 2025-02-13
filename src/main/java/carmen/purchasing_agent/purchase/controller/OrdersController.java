@@ -1,5 +1,6 @@
 package carmen.purchasing_agent.purchase.controller;
 
+import carmen.purchasing_agent.core.dto.OrderPackagingDTO;
 import carmen.purchasing_agent.core.dto.OrdersDTO;
 import carmen.purchasing_agent.core.entity.Orders;
 import carmen.purchasing_agent.core.util.ResultVoUtil;
@@ -125,6 +126,20 @@ public class OrdersController {
     public ResultVO changePaymentMethod(@RequestBody OrdersDTO ordersDTO){
         try {
             String errMsg = ordersService.changePaymentMethod(ordersDTO);
+
+            if (StringUtils.isNotEmpty(errMsg)){
+                return ResultVoUtil.error(errMsg);
+            }
+            return ResultVoUtil.success("成功更改");
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
+
+    @PostMapping("/batchPackaging")
+    public ResultVO batchPackaging(@RequestBody OrderPackagingDTO orderPackagingDTO){
+        try {
+            String errMsg = ordersService.batchPackaging(orderPackagingDTO);
 
             if (StringUtils.isNotEmpty(errMsg)){
                 return ResultVoUtil.error(errMsg);

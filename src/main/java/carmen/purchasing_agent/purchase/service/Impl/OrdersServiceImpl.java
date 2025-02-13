@@ -1,5 +1,6 @@
 package carmen.purchasing_agent.purchase.service.Impl;
 
+import carmen.purchasing_agent.core.dto.OrderPackagingDTO;
 import carmen.purchasing_agent.core.dto.OrdersDTO;
 import carmen.purchasing_agent.core.entity.Customer;
 import carmen.purchasing_agent.core.entity.Orders;
@@ -52,6 +53,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setCreateDate(new Date());
         orders.setModifyDate(new Date());
         orders.setStatus("備貨中");
+        orders.setPackageName("default");
 
         productRepository.save(product);
         ordersRepository.save(orders);
@@ -179,6 +181,18 @@ public class OrdersServiceImpl implements OrdersService {
 
         }catch (Exception e){
             return "更改失敗";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String batchPackaging(OrderPackagingDTO orderPackagingDTO) {
+
+        try {
+            ordersRepository.batchUpdatePackageNameByOrderIds(orderPackagingDTO.getOrderIdList(), orderPackagingDTO.getPackageName());
+            return null;
+        }catch (Exception e){
+            return "打包失敗";
         }
     }
 }

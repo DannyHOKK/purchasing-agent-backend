@@ -2,7 +2,6 @@ package carmen.purchasing_agent.core.entity;
 
 import carmen.purchasing_agent.core.dto.OrdersDTO;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.Date;
 
@@ -23,6 +22,7 @@ public class Orders {
     private String paymentMethod;
     private String remark;
     private String status;
+    private String packageName;
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
     private Product product;
@@ -54,6 +54,14 @@ public class Orders {
         this.status = status;
         this.product = product;
         this.customer = customer;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 
     public String getOrderPlatform() {
