@@ -53,7 +53,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setCreateDate(new Date());
         orders.setModifyDate(new Date());
         orders.setStatus("備貨中");
-        orders.setPackageName("default");
+        orders.setPackageName(ordersDTO.getPackageName());
 
         productRepository.save(product);
         ordersRepository.save(orders);
@@ -62,9 +62,9 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<Orders> getAllOrders() {
+    public List<Orders> getAllOrders(String packageName) {
 
-        List<Orders> ordersList = ordersRepository.findAllDescOrder();
+        List<Orders> ordersList = ordersRepository.findAllDescOrderByPackageName(packageName);
 
         return ordersList;
     }
@@ -193,6 +193,16 @@ public class OrdersServiceImpl implements OrdersService {
             return null;
         }catch (Exception e){
             return "打包失敗";
+        }
+    }
+
+    @Override
+    public List<String> getPackageName() {
+        try {
+            List<String> packageName = ordersRepository.getPackageName();
+            return packageName;
+        }catch (Exception e){
+            return null;
         }
     }
 }

@@ -6,6 +6,7 @@ import carmen.purchasing_agent.core.entity.Orders;
 import carmen.purchasing_agent.core.util.ResultVoUtil;
 import carmen.purchasing_agent.core.vo.ResultVO;
 import carmen.purchasing_agent.purchase.service.OrdersService;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,11 @@ public class OrdersController {
     @Autowired
     private OrdersService ordersService;
 
-    @GetMapping("/getAllOrders")
-    public ResultVO getAllOrders(){
+    @PostMapping("/getAllOrders")
+    public ResultVO getAllOrders(@RequestParam("packageName") String packageName){
         try {
-            List<Orders> ordersList = ordersService.getAllOrders();
+            List<Orders> ordersList = ordersService.getAllOrders(packageName);
 
-            if (ObjectUtils.isEmpty(ordersList)){
-                return ResultVoUtil.error("失敗");
-            }
             return ResultVoUtil.success("成功",ordersList);
         }catch (Exception e){
             return ResultVoUtil.error();
@@ -149,5 +147,17 @@ public class OrdersController {
             return ResultVoUtil.error();
         }
     }
+    @GetMapping("/getPackageName")
+    public ResultVO getPackageName(){
+        try {
+            List<String> packageNameList = ordersService.getPackageName();
 
+            if (packageNameList.isEmpty() || packageNameList == null){
+                return ResultVoUtil.error("無法取得包裝名稱");
+            }
+            return ResultVoUtil.success(packageNameList);
+        }catch (Exception e){
+            return ResultVoUtil.error();
+        }
+    }
 }

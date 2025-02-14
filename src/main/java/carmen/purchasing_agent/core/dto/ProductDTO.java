@@ -18,6 +18,15 @@ public class ProductDTO {
     private Integer stock;
     private Boolean commission;
     private List<String> productColor;
+    private String packageName;
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
     public List<String> getProductColor() {
         return productColor;

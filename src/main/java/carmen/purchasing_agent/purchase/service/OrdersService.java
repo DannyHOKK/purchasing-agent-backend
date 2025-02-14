@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrdersService {
     String createOrder(OrdersDTO ordersDTO);
 
-    List<Orders> getAllOrders();
+    List<Orders> getAllOrders(String packageName);
 
     String deleteOrderById(Integer orderId);
 
@@ -25,4 +25,6 @@ public interface OrdersService {
     String changePaymentMethod(OrdersDTO ordersDTO);
 
     String batchPackaging(OrderPackagingDTO orderPackagingDTO);
+
+    List<String> getPackageName();
 }

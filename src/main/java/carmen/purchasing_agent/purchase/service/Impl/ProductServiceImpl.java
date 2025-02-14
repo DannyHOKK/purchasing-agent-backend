@@ -3,7 +3,9 @@ package carmen.purchasing_agent.purchase.service.Impl;
 import carmen.purchasing_agent.core.dto.ProductDTO;
 import carmen.purchasing_agent.core.entity.ExchangeRate;
 import carmen.purchasing_agent.core.entity.Product;
+import carmen.purchasing_agent.core.entity.ProductStock;
 import carmen.purchasing_agent.purchase.repository.ExchangeRateRepository;
+import carmen.purchasing_agent.purchase.repository.ProductStockRepository;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
 import org.apache.commons.lang3.ArrayUtils;
@@ -25,6 +27,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ExchangeRateRepository exchangeRateRepository;
+
+    @Autowired
+    private ProductStockRepository productStockRepository;
 
     @Override
     @Transactional
@@ -53,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
             product.setModifyDate(new Date());
 
             productRepository.save(product);
+            createProductStock(product,productDTO);
         }else{
             for (int i = 0 ; i < productDTO.getProductColor().size(); i++){
 
@@ -66,15 +72,29 @@ public class ProductServiceImpl implements ProductService {
                 product.setProductName(productDTO.getProductName() + " | " + productDTO.getProductColor().get(i));
                 product.setExchangeRate(exchangeRate);
                 product.setDiscount(productDTO.getDiscount());
-                product.setStock(productDTO.getStock());
+//                product.setStock(productDTO.getStock());
                 product.setCreateDate(new Date());
                 product.setModifyDate(new Date());
 
                 productRepository.save(product);
+                createProductStock(product,productDTO);
             }
         }
 
         return null;
+    }
+
+    public void createProductStock(Product product, ProductDTO productDTO){
+        try {
+            ProductStock productStock = new ProductStock();
+            productStock.setProduct(product);
+            productStock.setStock(product.getStock());
+            productStock.setPackageName(productDTO.getPackageName());
+
+            productStockRepository.save(productStock);
+        }catch (Exception e){
+            return;
+        }
     }
 
     @Override
@@ -102,8 +122,22 @@ public class ProductServiceImpl implements ProductService {
         product.setProductPrice(productDTO.getProductPrice());
         product.setDiscount(productDTO.getDiscount());
         product.setModifyDate(new Date());
-        product.setStock(productDTO.getStock());
 
+
+        ProductStock checkProductStockExist = productStockRepository.checkProductStockExist(productDTO.getPackageName(), productDTO.getProductId());
+
+        if(ObjectUtils.isEmpty(checkProductStockExist)){
+            ProductStock productStock = new ProductStock();
+
+            productStock.setPackageName(productDTO.getPackageName());
+            productStock.setProduct(product);
+            productStock.setStock(productDTO.getStock());
+
+            productStockRepository.save(productStock);
+        }else{
+            checkProductStockExist.setStock(productDTO.getStock());
+            productStockRepository.save(checkProductStockExist);
+        }
         productRepository.save(product);
         return null;
     }
