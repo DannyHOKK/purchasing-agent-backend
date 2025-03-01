@@ -3,6 +3,7 @@ package carmen.purchasing_agent.purchase.repository;
 import carmen.purchasing_agent.core.entity.ProductStock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface ProductStockRepository extends JpaRepository<ProductStock, Inte
 
     @Query(value = "Select * from product_stock where PACKAGE_NAME = :packageName", nativeQuery = true)
     List<ProductStock> getAllProductStockByPackageName(String packageName);
+
+    @Query(value = "Select * from product_stock where PRODUCT_ID = :productId", nativeQuery = true)
+    List<ProductStock> findAllByProductId(@Param("productId") Integer productId);
 }

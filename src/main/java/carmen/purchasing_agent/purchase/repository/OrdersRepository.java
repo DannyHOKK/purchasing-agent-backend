@@ -25,4 +25,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     List<Orders> findAllDescOrderByPackageName(String packageName);
     @Query(value = "SELECT DISTINCT PACKAGE_NAME FROM orders", nativeQuery = true)
     List<String> getPackageName();
+
+    @Query(value = "SELECT * FROM orders WHERE PRODUCT_ID = :productId", nativeQuery = true)
+    List<Orders> findByProductId(@Param("productId") Integer productId);
 }

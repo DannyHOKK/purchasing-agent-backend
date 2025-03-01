@@ -2,9 +2,11 @@ package carmen.purchasing_agent.purchase.service.Impl;
 
 import carmen.purchasing_agent.core.dto.ProductDTO;
 import carmen.purchasing_agent.core.entity.ExchangeRate;
+import carmen.purchasing_agent.core.entity.Orders;
 import carmen.purchasing_agent.core.entity.Product;
 import carmen.purchasing_agent.core.entity.ProductStock;
 import carmen.purchasing_agent.purchase.repository.ExchangeRateRepository;
+import carmen.purchasing_agent.purchase.repository.OrdersRepository;
 import carmen.purchasing_agent.purchase.repository.ProductStockRepository;
 import carmen.purchasing_agent.purchase.service.ProductService;
 import carmen.purchasing_agent.purchase.repository.ProductRepository;
@@ -18,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,6 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductStockRepository productStockRepository;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @Override
     @Transactional
@@ -58,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
             product.setModifyDate(new Date());
 
             productRepository.save(product);
-            createProductStock(product,productDTO);
+//            createProductStock(product,productDTO);
         }else{
             for (int i = 0 ; i < productDTO.getProductColor().size(); i++){
 
@@ -77,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
                 product.setModifyDate(new Date());
 
                 productRepository.save(product);
-                createProductStock(product,productDTO);
+//                createProductStock(product,productDTO);
             }
         }
 
@@ -146,6 +153,28 @@ public class ProductServiceImpl implements ProductService {
     public String deleteProductById(Integer productId) {
 
         try{
+
+            List<Orders> findExistOrders = ordersRepository.findByProductId(productId);
+
+            if (!findExistOrders.isEmpty()){
+                return "刪除失敗，貨品已被落單，請先刪除訂單";
+            }
+            List<ProductStock> productStockList = productStockRepository.findAllByProductId(productId);
+
+            for (ProductStock stock :productStockList){
+                if(stock.getStock() != 0){
+                    return "刪除失敗，貨品已被落單，請先刪除訂單";
+                }
+            }
+
+            List<Integer> stockIds = productStockList.stream()
+                    .map(ProductStock::getStockId) // 假設 ProductStock 有 getId() 方法
+                    .collect(Collectors.toList());
+
+            if (!stockIds.isEmpty()) {
+                productStockRepository.deleteAllById(stockIds); // 刪除所有相關 product_stock
+            }
+
             productRepository.deleteById(productId);
             return null;
         }catch (Exception e){
