@@ -23,6 +23,7 @@ public class Orders {
     private String remark;
     private String status;
     private String packageName;
+    private Integer discount;
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
     private Product product;
@@ -40,6 +41,9 @@ public class Orders {
         this.paymentMethod = ordersDTO.getPaymentMethod();
         this.remark = ordersDTO.getRemark();
         this.quantity = ordersDTO.getQuantity();
+        this.discount = ordersDTO.getDiscount();
+        this.packageName = ordersDTO.getPackageName();
+        this.orderPlatform = ordersDTO.getOrderPlatform();
     }
 
     public Orders(Integer orderId, Integer quantity, String paid, Date createDate, Date modifyDate, String takeMethod, String paymentMethod, String remark, String status, Product product, Customer customer) {
@@ -54,6 +58,14 @@ public class Orders {
         this.status = status;
         this.product = product;
         this.customer = customer;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     public String getPackageName() {

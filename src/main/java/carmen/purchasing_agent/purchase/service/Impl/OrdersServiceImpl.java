@@ -47,13 +47,10 @@ public class OrdersServiceImpl implements OrdersService {
         }
 
         orders.setCustomer(customer);
-        orders.setOrderPlatform(ordersDTO.getOrderPlatform());
         orders.setProduct(product);
-        orders.setQuantity(orders.getQuantity());
         orders.setCreateDate(new Date());
         orders.setModifyDate(new Date());
         orders.setStatus("備貨中");
-        orders.setPackageName(ordersDTO.getPackageName());
 
         productRepository.save(product);
         ordersRepository.save(orders);
@@ -119,6 +116,7 @@ public class OrdersServiceImpl implements OrdersService {
             order.setPaymentMethod(ordersDTO.getPaymentMethod());
             order.setTakeMethod(ordersDTO.getTakeMethod());
             order.setRemark(ordersDTO.getRemark());
+            order.setDiscount(ordersDTO.getDiscount());
             ordersRepository.save(order);
 
             return null;

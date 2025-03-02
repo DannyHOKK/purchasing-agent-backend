@@ -16,6 +16,15 @@ public class OrdersDTO {
     private String productName;
     private String status;
     private String packageName;
+    private Integer discount;
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 
     public String getPackageName() {
         return packageName;
