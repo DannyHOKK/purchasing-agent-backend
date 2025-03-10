@@ -1,9 +1,14 @@
 package carmen.purchasing_agent.core.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "product_stock")
+@Table(name = "product_stock",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"PRODUCT_ID", "PACKAGE_NAME"}))
 public class ProductStock {
 
     @Id
@@ -13,6 +18,7 @@ public class ProductStock {
     @JoinColumn(name = "PRODUCT_ID",referencedColumnName = "PRODUCT_ID")
     private Product product;
     private Integer stock;
+    @Column(name = "PACKAGE_NAME")
     private String packageName;
 
     public ProductStock() {
@@ -25,35 +31,4 @@ public class ProductStock {
         this.packageName = packageName;
     }
 
-    public Integer getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(Integer stockId) {
-        this.stockId = stockId;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
 }

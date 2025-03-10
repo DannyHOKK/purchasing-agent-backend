@@ -5,5 +5,5 @@ import carmen.purchasing_agent.core.entity.ProductStock;
 import java.util.List;
 
 public interface ProductStockService {
-    List<ProductStock> getAllProductStockByPackageName(String productStockDTO);
+    List<ProductStock> getAllProductStockByPackageName(String packageName);
 }

@@ -3,10 +3,14 @@ package carmen.purchasing_agent.core.entity;
 import carmen.purchasing_agent.core.dto.ExchangeRateDTO;
 import carmen.purchasing_agent.core.dto.ExchangeRecordDTO;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "EXCHANGE_RECORD")
 public class ExchangeRecord {
@@ -39,51 +43,4 @@ public class ExchangeRecord {
         this.createDate = createDate;
     }
 
-    public Integer getExchangeId() {
-        return exchangeId;
-    }
-
-    public void setExchangeId(Integer exchangeId) {
-        this.exchangeId = exchangeId;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public Integer getExchangeCost() {
-        return exchangeCost;
-    }
-
-    public void setExchangeCost(Integer exchangeCost) {
-        this.exchangeCost = exchangeCost;
-    }
-
-    public Double getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(Double exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public LocalDate getExchangeDate() {
-        return exchangeDate;
-    }
-
-    public void setExchangeDate(LocalDate exchangeDate) {
-        this.exchangeDate = exchangeDate;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 }

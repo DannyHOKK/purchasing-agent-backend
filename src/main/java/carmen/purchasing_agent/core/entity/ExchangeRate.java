@@ -4,9 +4,13 @@ import carmen.purchasing_agent.core.dto.ExchangeRateDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "EXCHANGE_RATE")
 public class ExchangeRate {
@@ -24,35 +28,4 @@ public class ExchangeRate {
         this.exchangeRate = exchangeRateDTO.getExchangeRate();
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public Double getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(Double exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
 }

@@ -1,24 +1,15 @@
 package carmen.purchasing_agent.core.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class OrderPackagingDTO {
-    private List<String> orderIdList;
+    private List<Integer> orderIdList;
     private String packageName;
+    private String packagingToGoName;
 
-    public List<String> getOrderIdList() {
-        return orderIdList;
-    }
-
-    public void setOrderIdList(List<String> orderIdList) {
-        this.orderIdList = orderIdList;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
 }

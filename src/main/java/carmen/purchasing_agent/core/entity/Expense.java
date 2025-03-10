@@ -2,10 +2,14 @@ package carmen.purchasing_agent.core.entity;
 
 import carmen.purchasing_agent.core.dto.ExpenseDTO;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "EXPENSE")
 public class Expense {
@@ -47,75 +51,4 @@ public class Expense {
         this.payDate = expenseDTO.getPayDate();
     }
 
-    public ExchangeRate getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(ExchangeRate exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public LocalDate getPayDate() {
-        return payDate;
-    }
-
-    public void setPayDate(LocalDate payDate) {
-        this.payDate = payDate;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public Integer getExpenseId() {
-        return expenseId;
-    }
-
-    public void setExpenseId(Integer expenseId) {
-        this.expenseId = expenseId;
-    }
-
-    public String getConsumeType() {
-        return consumeType;
-    }
-
-    public void setConsumeType(String consumeType) {
-        this.consumeType = consumeType;
-    }
-
-    public Integer getConsumeCost() {
-        return consumeCost;
-    }
-
-    public void setConsumeCost(Integer consumeCost) {
-        this.consumeCost = consumeCost;
-    }
-
-    public String getPayment() {
-        return payment;
-    }
-
-    public void setPayment(String payment) {
-        this.payment = payment;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 }
